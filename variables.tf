@@ -51,6 +51,12 @@ variable "logging" { #https://avd.aquasec.com/misconfig/aws/s3/avd-aws-0089/#Ter
   }
 }
 
+variable "policy" {
+  description = "S3 policy"
+  type        = string
+  default     = null
+}
+
 variable "tags" {
   description = "S3 tags"
   type        = map(string)

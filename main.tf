@@ -23,6 +23,16 @@ resource "aws_s3_bucket_public_access_block" "this" {
   restrict_public_buckets = var.public_access_block.restrict_public_buckets
 }
 
+resource "aws_s3_bucket_policy" "this" {
+  count  = var.policy == null ? 0 : 1
+  bucket = aws_s3_bucket.this.id
+  policy = var.policy
+
+  depends_on = [
+    aws_s3_bucket_public_access_block.this
+  ]
+}
+
 resource "aws_s3_bucket_versioning" "this" {
   bucket = aws_s3_bucket.this.bucket
   versioning_configuration {
